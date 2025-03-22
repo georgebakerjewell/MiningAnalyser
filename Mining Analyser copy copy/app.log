@@ -1,0 +1,132 @@
+2025-03-22 09:40:11,300 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-22 09:40:11,301 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-22 09:40:11,303 - werkzeug - INFO -  * Restarting with stat
+2025-03-22 09:40:11,794 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 09:40:11,807 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 09:40:13,684 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 09:40:13] "GET / HTTP/1.1" 200 -
+2025-03-22 09:40:18,832 - __main__ - INFO - Processing file: 2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf, size: 17.68 MB
+2025-03-22 09:40:18,901 - __main__ - INFO - File saved: /var/folders/_m/3kk_mm110kv279d1pkx760fm0000gn/T/2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf
+2025-03-22 09:40:18,901 - __main__ - INFO - Extracting text from PDF
+2025-03-22 09:40:37,256 - __main__ - INFO - Successfully extracted 982256 characters from PDF
+2025-03-22 09:40:37,256 - __main__ - INFO - Sending text to Claude for analysis
+2025-03-22 09:40:37,256 - __main__ - INFO - Attempting to use model: claude-3-7-sonnet-20250219, attempt 1
+2025-03-22 09:40:37,257 - __main__ - WARNING - Text truncated from 982256 to 40000 characters
+2025-03-22 09:41:38,223 - __main__ - INFO - API request took 60.97 seconds
+2025-03-22 09:41:38,223 - __main__ - INFO - Response status code: 200
+2025-03-22 09:41:38,226 - __main__ - INFO - Successfully received response from claude-3-7-sonnet-20250219
+2025-03-22 09:41:38,232 - __main__ - INFO - Temporary file removed: /var/folders/_m/3kk_mm110kv279d1pkx760fm0000gn/T/2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf
+2025-03-22 09:41:38,235 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 09:41:38] "POST /upload HTTP/1.1" 200 -
+2025-03-22 10:06:41,898 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-22 10:06:41,900 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-22 10:06:41,904 - werkzeug - INFO -  * Restarting with stat
+2025-03-22 10:06:43,156 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:06:43,181 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:07:06,716 - werkzeug - INFO -  * Detected change in '/Users/georgebaker/PycharmProjects/PythonProject1/Mining Analyser/app.py', reloading
+2025-03-22 10:07:06,883 - werkzeug - INFO -  * Restarting with stat
+2025-03-22 10:07:08,183 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:07:08,207 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:09:54,244 - werkzeug - INFO -  * Detected change in '/Users/georgebaker/PycharmProjects/PythonProject1/Mining Analyser/app.py', reloading
+2025-03-22 10:09:54,395 - werkzeug - INFO -  * Restarting with stat
+2025-03-22 10:09:55,846 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:09:55,879 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:10:33,238 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 10:10:33] "GET / HTTP/1.1" 200 -
+2025-03-22 10:10:37,709 - __main__ - INFO - Processing file: Mining_Feasibility_Study_Analyzer.pdf, size: 0.54 MB
+2025-03-22 10:10:37,715 - __main__ - INFO - File saved: /var/folders/_m/3kk_mm110kv279d1pkx760fm0000gn/T/Mining_Feasibility_Study_Analyzer.pdf
+2025-03-22 10:10:37,715 - __main__ - INFO - Extracting text from PDF
+2025-03-22 10:10:37,995 - __main__ - INFO - Successfully extracted 17857 characters from PDF
+2025-03-22 10:10:37,995 - __main__ - INFO - Sending text to Claude for analysis
+2025-03-22 10:10:37,995 - __main__ - INFO - Attempting to use model: claude-3-7-sonnet-20250219, attempt 1
+2025-03-22 10:10:38,239 - __main__ - INFO - API request took 0.24 seconds
+2025-03-22 10:10:38,239 - __main__ - INFO - Response status code: 401
+2025-03-22 10:10:38,242 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 10:10:38] "[31m[1mPOST /upload HTTP/1.1[0m" 400 -
+2025-03-22 10:11:59,601 - werkzeug - INFO -  * Detected change in '/Users/georgebaker/PycharmProjects/PythonProject1/Mining Analyser/app.py', reloading
+2025-03-22 10:11:59,722 - werkzeug - INFO -  * Restarting with stat
+2025-03-22 10:12:01,199 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:12:01,225 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:12:04,578 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 10:12:04] "GET / HTTP/1.1" 200 -
+2025-03-22 10:12:08,414 - __main__ - INFO - Processing file: 2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf, size: 17.68 MB
+2025-03-22 10:12:08,483 - __main__ - INFO - File saved: /var/folders/_m/3kk_mm110kv279d1pkx760fm0000gn/T/2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf
+2025-03-22 10:12:08,483 - __main__ - INFO - Extracting text from PDF
+2025-03-22 10:12:24,358 - __main__ - INFO - Successfully extracted 982256 characters from PDF
+2025-03-22 10:12:24,358 - __main__ - INFO - Sending text to Claude for analysis
+2025-03-22 10:12:24,358 - __main__ - INFO - Attempting to use model: claude-3-7-sonnet-20250219, attempt 1
+2025-03-22 10:12:24,359 - __main__ - WARNING - Text truncated from 982256 to 40000 characters
+2025-03-22 10:12:24,666 - __main__ - INFO - API request took 0.31 seconds
+2025-03-22 10:12:24,666 - __main__ - INFO - Response status code: 401
+2025-03-22 10:12:24,677 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 10:12:24] "[31m[1mPOST /upload HTTP/1.1[0m" 400 -
+2025-03-22 10:14:17,154 - werkzeug - INFO -  * Detected change in '/Users/georgebaker/PycharmProjects/PythonProject1/Mining Analyser/app.py', reloading
+2025-03-22 10:14:17,605 - werkzeug - INFO -  * Restarting with stat
+2025-03-22 10:14:19,034 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:14:19,062 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:16:07,664 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:16:07,665 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:16:09,426 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-22 10:16:09,427 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-22 10:16:09,431 - werkzeug - INFO -  * Restarting with stat
+2025-03-22 10:16:10,522 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:16:10,583 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:20:22,591 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:20:22,593 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:20:24,342 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-22 10:20:24,342 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-22 10:20:24,345 - werkzeug - INFO -  * Restarting with stat
+2025-03-22 10:20:25,239 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:20:25,268 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:20:27,437 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 10:20:27] "GET / HTTP/1.1" 200 -
+2025-03-22 10:20:32,702 - __main__ - INFO - Processing file: 2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf, size: 17.68 MB
+2025-03-22 10:20:32,754 - __main__ - INFO - File saved: /var/folders/_m/3kk_mm110kv279d1pkx760fm0000gn/T/2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf
+2025-03-22 10:20:32,754 - __main__ - INFO - Extracting text from PDF
+2025-03-22 10:20:48,829 - __main__ - INFO - Successfully extracted 982256 characters from PDF
+2025-03-22 10:20:48,830 - __main__ - INFO - Sending text to Claude for analysis
+2025-03-22 10:20:48,830 - __main__ - INFO - Attempting to use model: claude-3-7-sonnet-20250219, attempt 1
+2025-03-22 10:20:48,830 - __main__ - WARNING - Text truncated from 982256 to 40000 characters
+2025-03-22 10:20:49,696 - __main__ - INFO - API request took 0.87 seconds
+2025-03-22 10:20:49,697 - __main__ - INFO - Response status code: 401
+2025-03-22 10:20:49,708 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 10:20:49] "[31m[1mPOST /upload HTTP/1.1[0m" 400 -
+2025-03-22 10:22:49,815 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:22:49,817 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:22:51,857 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-03-22 10:22:51,858 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-22 10:22:51,862 - werkzeug - INFO -  * Restarting with stat
+2025-03-22 10:22:53,082 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:22:53,106 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:22:54,244 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 10:22:54] "GET / HTTP/1.1" 200 -
+2025-03-22 10:22:58,305 - __main__ - INFO - Processing file: 2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf, size: 17.68 MB
+2025-03-22 10:22:58,365 - __main__ - INFO - File saved: /var/folders/_m/3kk_mm110kv279d1pkx760fm0000gn/T/2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf
+2025-03-22 10:22:58,365 - __main__ - INFO - Extracting text from PDF
+2025-03-22 10:23:18,265 - __main__ - INFO - Successfully extracted 982256 characters from PDF
+2025-03-22 10:23:18,265 - __main__ - INFO - Sending text to Claude for analysis
+2025-03-22 10:23:18,265 - __main__ - INFO - Attempting to use model: claude-3-7-sonnet-20250219, attempt 1
+2025-03-22 10:23:18,265 - __main__ - WARNING - Text truncated from 982256 to 40000 characters
+2025-03-22 10:24:10,509 - __main__ - INFO - API request took 52.24 seconds
+2025-03-22 10:24:10,509 - __main__ - INFO - Response status code: 200
+2025-03-22 10:24:10,514 - __main__ - INFO - Successfully received response from claude-3-7-sonnet-20250219
+2025-03-22 10:24:10,522 - __main__ - INFO - Temporary file removed: /var/folders/_m/3kk_mm110kv279d1pkx760fm0000gn/T/2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf
+2025-03-22 10:24:10,526 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 10:24:10] "POST /upload HTTP/1.1" 200 -
+2025-03-22 10:30:18,436 - __main__ - CRITICAL - CLAUDE_API_KEY environment variable is not set. The application will not function correctly.
+2025-03-22 10:31:13,027 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.30:5000
+2025-03-22 10:31:13,028 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-22 10:31:13,032 - werkzeug - INFO -  * Restarting with stat
+2025-03-22 10:31:13,902 - werkzeug - WARNING -  * Debugger is active!
+2025-03-22 10:31:13,913 - werkzeug - INFO -  * Debugger PIN: 841-716-751
+2025-03-22 10:31:15,506 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 10:31:15] "GET / HTTP/1.1" 200 -
+2025-03-22 10:31:19,543 - __main__ - INFO - Processing file: 2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf, size: 17.68 MB
+2025-03-22 10:31:19,657 - __main__ - INFO - File saved: /var/folders/_m/3kk_mm110kv279d1pkx760fm0000gn/T/2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf
+2025-03-22 10:31:19,657 - __main__ - INFO - Extracting text from PDF
+2025-03-22 10:31:34,065 - __main__ - INFO - Successfully extracted 982256 characters from PDF
+2025-03-22 10:31:34,065 - __main__ - INFO - Sending text to Claude for analysis
+2025-03-22 10:31:34,066 - __main__ - INFO - Attempting to use model: claude-3-7-sonnet-20250219, attempt 1
+2025-03-22 10:31:34,066 - __main__ - WARNING - Text truncated from 982256 to 40000 characters
+2025-03-22 10:32:24,804 - __main__ - INFO - API request took 50.74 seconds
+2025-03-22 10:32:24,805 - __main__ - INFO - Response status code: 200
+2025-03-22 10:32:24,806 - __main__ - INFO - Successfully received response from claude-3-7-sonnet-20250219
+2025-03-22 10:32:24,810 - __main__ - INFO - Temporary file removed: /var/folders/_m/3kk_mm110kv279d1pkx760fm0000gn/T/2024-03-27-Global-Atomic-Dasa-Feasibility-Report-Final.pdf
+2025-03-22 10:32:24,814 - werkzeug - INFO - 127.0.0.1 - - [22/Mar/2025 10:32:24] "POST /upload HTTP/1.1" 200 -
