@@ -1,21 +1,14 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
 from werkzeug.utils import secure_filename
-import os
-import tempfile
-import PyPDF2
-import requests
-import json
-import logging
+import os, tempfile, PyPDF2, requests, json, logging, time, traceback
 from dotenv import load_dotenv
-import time
-import traceback
 
 # Load environment variables from .env file if present
 load_dotenv()
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = tempfile.gettempdir()
-app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 32MB max file size
+app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # Increased to 100MB max file size
 
 # Get API key from environment variable
 CLAUDE_API_KEY = os.environ.get("CLAUDE_API_KEY")
@@ -24,10 +17,7 @@ CLAUDE_API_KEY = os.environ.get("CLAUDE_API_KEY")
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler("app.log")
-    ]
+    handlers=[logging.StreamHandler(), logging.FileHandler("app.log")]
 )
 logger = logging.getLogger(__name__)
 
@@ -48,11 +38,9 @@ def extract_text_from_pdf(pdf_path):
     try:
         with open(pdf_path, 'rb') as file:
             reader = PyPDF2.PdfReader(file)
-
             # Check if PDF is empty
             if len(reader.pages) == 0:
                 return "Error: The PDF contains no pages."
-
             # Extract text from each page with page-specific error handling
             for i, page in enumerate(reader.pages):
                 try:
@@ -63,12 +51,9 @@ def extract_text_from_pdf(pdf_path):
                         logger.warning(f"Page {i + 1} contains no extractable text.")
                 except Exception as e:
                     logger.error(f"Error extracting text from page {i + 1}: {str(e)}")
-                    # Continue with other pages even if one fails
-
             # Check if we managed to extract any text at all
             if not text.strip():
                 return "Error: Could not extract any text from the PDF. The document might be scanned, protected, or contain only images."
-
     except PyPDF2.errors.PdfReadError as e:
         error_msg = f"PDF read error: {str(e)}. The file might be corrupted or password-protected."
         logger.error(error_msg)
@@ -77,7 +62,6 @@ def extract_text_from_pdf(pdf_path):
         error_msg = f"Error extracting text from PDF: {str(e)}"
         logger.error(error_msg)
         return error_msg
-
     # Log statistics about extracted text
     logger.info(f"Successfully extracted {len(text)} characters from PDF")
     return text
@@ -90,7 +74,6 @@ def format_analysis_results(analysis_text):
         return f'<div class="error-message">{analysis_text}</div>'
 
     formatted_html = '<div class="analysis-results">'
-
     # Split the analysis into sections
     lines = analysis_text.split('\n')
     current_section = None
@@ -120,22 +103,12 @@ def format_analysis_results(analysis_text):
 
     # Add a ratings overview section at the top if we found ratings
     if ratings:
-        formatted_html += '<div class="ratings-overview">'
-        formatted_html += '<h2>Ratings Overview</h2>'
-        formatted_html += '<div class="ratings-grid">'
-
+        formatted_html += '<div class="ratings-overview"><h2>Ratings Overview</h2><div class="ratings-grid">'
         for aspect, rating in ratings.items():
             # Calculate the percentage for the progress bar
             percentage = (rating / 10) * 100
-
             # Determine color based on rating
-            if rating >= 8:
-                color = "#28a745"  # Green for high ratings
-            elif rating >= 6:
-                color = "#ffc107"  # Yellow for medium ratings
-            else:
-                color = "#dc3545"  # Red for low ratings
-
+            color = "#28a745" if rating >= 8 else "#ffc107" if rating >= 6 else "#dc3545"
             formatted_html += f'''
             <div class="rating-item">
                 <div class="aspect-name">{aspect}</div>
@@ -143,14 +116,11 @@ def format_analysis_results(analysis_text):
                     <div class="rating-bar" style="width: {percentage}%; background-color: {color};"></div>
                 </div>
                 <div class="rating-value">{rating}/10</div>
-            </div>
-            '''
-
+            </div>'''
         formatted_html += '</div></div>'  # Close ratings-grid and ratings-overview
 
     # Second pass: build the formatted content
     in_list = False
-
     for line in lines:
         line = line.strip()
         if not line:
@@ -179,8 +149,7 @@ def format_analysis_results(analysis_text):
                 section_content = []
 
         # Check for main headings like "Key Strengths", "Key Weaknesses", "Recommendations", etc.
-        elif any(heading in line.lower() for heading in ["key strengths", "key weaknesses", "recommendations",
-                                                         "financing potential", "likelihood", "overall score"]):
+        elif any(heading in line.lower() for heading in ["key strengths", "key weaknesses", "recommendations", "financing potential", "likelihood", "overall score"]):
             if in_list:
                 formatted_html += '</ul>'
                 in_list = False
@@ -188,13 +157,11 @@ def format_analysis_results(analysis_text):
                 formatted_html += f'<div class="section-content">{"".join(section_content)}</div></div>'
                 current_section = None
                 section_content = []
-
             formatted_html += f'<div class="major-section"><h2>{line}</h2>'
             current_section = "major"
 
         # Check for bullet points
-        elif line.startswith('- ') or line.startswith('* ') or (
-                line.startswith(tuple('123456789')) and '. ' in line[:5]):
+        elif line.startswith('- ') or line.startswith('* ') or (line.startswith(tuple('123456789')) and '. ' in line[:5]):
             if not in_list:
                 if section_content:
                     # Add any previous paragraph text
@@ -208,7 +175,6 @@ def format_analysis_results(analysis_text):
                 bullet_text = line[2:]
             else:
                 bullet_text = line.split('. ', 1)[1] if '. ' in line else line
-
             formatted_html += f'<li>{bullet_text}</li>'
 
         # Regular content
@@ -226,8 +192,7 @@ def format_analysis_results(analysis_text):
                     # Check if this starts with a number
                     if any(aspect.startswith(str(i)) for i in range(1, 10)):
                         # This is a rating line
-                        section_content.append(
-                            f'<div class="rating-line"><strong>{aspect}:</strong> {explanation}</div>')
+                        section_content.append(f'<div class="rating-line"><strong>{aspect}:</strong> {explanation}</div>')
                     else:
                         section_content.append(f'<p><strong>{aspect}:</strong> {explanation}</p>')
                 else:
@@ -241,15 +206,8 @@ def format_analysis_results(analysis_text):
                         if "/100" in score_text or "/ 100" in score_text:
                             score_value = int(score_text.split("/")[0].strip())
                             percentage = score_value
-
                             # Determine color based on score
-                            if score_value >= 80:
-                                color = "#28a745"  # Green for high scores
-                            elif score_value >= 60:
-                                color = "#ffc107"  # Yellow for medium scores
-                            else:
-                                color = "#dc3545"  # Red for low scores
-
+                            color = "#28a745" if score_value >= 80 else "#ffc107" if score_value >= 60 else "#dc3545"
                             section_content.append(f'''
                             <div class="overall-score">
                                 <div class="score-label">{line.split(":")[0].strip()}:</div>
@@ -257,8 +215,7 @@ def format_analysis_results(analysis_text):
                                     <div class="score-bar" style="width: {percentage}%; background-color: {color};"></div>
                                 </div>
                                 <div class="score-value">{score_value}/100</div>
-                            </div>
-                            ''')
+                            </div>''')
                         else:
                             section_content.append(f'<p class="highlight-text">{line}</p>')
                     except (ValueError, IndexError):
@@ -269,12 +226,9 @@ def format_analysis_results(analysis_text):
     # Close any open elements
     if in_list:
         formatted_html += '</ul>'
-
     if current_section:
         formatted_html += f'<div class="section-content">{"".join(section_content)}</div></div>'
-
     formatted_html += '</div>'  # Close analysis-results
-
     return formatted_html
 
 
@@ -406,19 +360,18 @@ def analyze_with_claude(text):
         for attempt in range(max_retries):
             try:
                 logger.info(f"Attempting to use model: {model}, attempt {attempt + 1}")
-
                 headers = {
                     "Content-Type": "application/json",
                     "anthropic-version": "2023-06-01",
                     "x-api-key": CLAUDE_API_KEY
                 }
 
-                # Limit text to a reasonable size - max 40k chars for reliability
-                trimmed_text = text[:40000]
+                # Limit text to a reasonable size - max 100k chars for reliability
+                trimmed_text = text[:100000]  # Increased from 40k to 100k
 
                 # Warn if text was truncated
-                if len(text) > 40000:
-                    logger.warning(f"Text truncated from {len(text)} to 40000 characters")
+                if len(text) > 100000:
+                    logger.warning(f"Text truncated from {len(text)} to 100000 characters")
 
                 payload = {
                     "model": model,
@@ -443,14 +396,12 @@ def analyze_with_claude(text):
                 if response.status_code == 200:
                     # Success case
                     response_data = response.json()
-
                     if "content" in response_data and len(response_data["content"]) > 0:
                         logger.info(f"Successfully received response from {model}")
                         return response_data["content"][0]["text"]
                     else:
                         logger.error(f"Unexpected response structure: {json.dumps(response_data)[:500]}")
                         continue  # Try next attempt or model
-
                 elif response.status_code == 401:
                     return "Error: API authentication failed. Please check your API key."
                 elif response.status_code == 403:
@@ -470,14 +421,12 @@ def analyze_with_claude(text):
                     # For other errors, log details and continue with retries
                     logger.error(f"Unexpected status code: {response.status_code}")
                     logger.error(f"Response body: {response.text[:1000]}")
-
                     # Only retry if it makes sense for this status code
                     if response.status_code >= 500:  # Server errors are retryable
                         time.sleep(retry_delay)
                         continue
                     else:
                         break  # Client errors are not retryable, move to next model
-
             except requests.exceptions.Timeout:
                 logger.error("Request timeout")
                 time.sleep(retry_delay)
@@ -588,8 +537,7 @@ def upload_file():
 
             # Check file size before processing
             if file_size > app.config['MAX_CONTENT_LENGTH']:
-                return jsonify({
-                    "error": f"File too large. Maximum size is {app.config['MAX_CONTENT_LENGTH'] / 1024 / 1024} MB"}), 413
+                return jsonify({"error": f"File too large. Maximum size is {app.config['MAX_CONTENT_LENGTH'] / 1024 / 1024} MB"}), 413
 
             file.save(filepath)
             logger.info(f"File saved: {filepath}")
@@ -605,8 +553,7 @@ def upload_file():
             # If text extraction resulted in very little text
             if len(pdf_text) < 100:
                 logger.warning("Insufficient text extracted from PDF")
-                return jsonify({
-                    "error": "Could not extract sufficient text from the PDF. The document might be scanned or contain only images."}), 400
+                return jsonify({"error": "Could not extract sufficient text from the PDF. The document might be scanned or contain only images."}), 400
 
             # Analyze with Claude
             logger.info("Sending text to Claude for analysis")
@@ -650,22 +597,18 @@ def test_api():
     try:
         # Simple test message
         test_message = "Hello, Claude. Please respond with 'API connection successful.'"
-
         headers = {
             "Content-Type": "application/json",
             "anthropic-version": "2023-06-01",
             "x-api-key": CLAUDE_API_KEY
         }
-
         # Try with the newest model first
         model = "claude-3-7-sonnet-20250219"
-
         payload = {
             "model": model,
             "max_tokens": 100,
             "messages": [{"role": "user", "content": test_message}]
         }
-
         # Make request
         response = requests.post(
             "https://api.anthropic.com/v1/messages",
@@ -673,7 +616,6 @@ def test_api():
             json=payload,
             timeout=30
         )
-
         # Return results
         return jsonify({
             "status": "success" if response.status_code == 200 else "error",
@@ -682,7 +624,6 @@ def test_api():
             "api_key_configured": bool(CLAUDE_API_KEY),
             "response_preview": response.text[:300] if response.status_code == 200 else response.text
         })
-
     except Exception as e:
         logger.error(f"API test error: {e}")
         logger.error(traceback.format_exc())
